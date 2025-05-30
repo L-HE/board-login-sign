@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+    <style>
+        table, tr, td, th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>postId</th>
+        <td th:text="${board.postId}"></td>
+    </tr>
+    <tr>
+        <th>title</th>
+        <td th:text="${board.title}"></td>
+    </tr>
+    <tr>
+        <th>userId</th>
+        <td th:text="${board.userId}"></td>
+    </tr>
+    <tr>
+        <th>content</th>
+        <td th:text="${board.content}"></td>
+    </tr>
+    <tr>
+        <th>createdAt</th>
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+    <tr>
+        <th>viewCnt</th>
+        <td th:text="${board.viewCnt}"></td>
+    </tr>
+    <tr>
+        <th>likes</th>
+        <td th:text="${board.likes}"></td>
+    </tr>
+</table>
+<button onclick="listReq()">목록</button>
+<button onclick="updateReq()">수정</button>
+<button onclick="deleteReq()">삭제</button>
+</body>
+<script th:inline="javascript">
+    const listReq = () => {
+        location.href = "/list";
+    }
+    //수정 버튼 클릭시 실행되는 함수
+    const updateReq = () => {
+        location.href = '/update/[[${board.postId}]]';
+    }
+    //삭제 버튼 클릭시 실행되는 함수
+    const deleteReq = () => {
+        location.href = '/delete/[[${board.postId}]]';
+    }
+</script>
+</html>
