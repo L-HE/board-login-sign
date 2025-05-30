@@ -15,15 +15,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // CSRF 보호 끔 (폼 테스트용일 때)
+//                .csrf(csrf -> csrf.disable()) // CSRF 보호 끔 (폼 테스트용일 때)
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/", "/login", "/save", "/css/**").permitAll() // 여기서 /save 허용!
+//                        .anyRequest().authenticated()
+//                )
+//                .oauth2Login(oauth2 -> oauth2
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/main", true)
+//                )
+//                .logout(logout -> logout
+//                        .logoutSuccessUrl("/login")
+//                        .permitAll()
+//                );
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/save", "/css/**").permitAll() // 여기서 /save 허용!
+                        .requestMatchers("/", "/login", "/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
+                .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
                         .defaultSuccessUrl("/main", true)
-                        .permitAll()
                 );
 
         return http.build();
